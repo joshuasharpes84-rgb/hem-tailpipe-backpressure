@@ -8,6 +8,10 @@ equilibrium model (HEM) with Leung's omega method, per API 521 7th Ed. (June 202
 > VS Code or any editor, and extend it for your own case with your AI assistant. This README is written for
 > both of you. Taking these tools further is a free service of
 > [Sharpes Process Engineering](https://jsharpes-portfolio.netlify.app); the site's Ask box can point you to the right starting file.
+>
+> **License:** [MIT](LICENSE) for the code and original text: use, modify and share freely, keeping the
+> copyright notice. Provided as is, without warranty of any kind. It is an engineering study aid, not a
+> substitute for a design checked and sealed by a licensed professional engineer.
 
 - **Live tool:** https://jsharpes-portfolio.netlify.app/#hem-calc
 - **Run it locally:** download this repo and open `index.html` in a browser. It needs no install and no server.
