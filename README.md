@@ -4,6 +4,11 @@ Checks whether a pressure-relief valve's discharge pipe (tailpipe) can carry a *
 relief stream** without exceeding the valve's allowable built-up backpressure. It uses the homogeneous
 equilibrium model (HEM) with Leung's omega method, per API 521 7th Ed. (June 2020) §5.5.10.
 
+> **Make it yours, free:** download this repo (**Code → Download ZIP**, or `git clone`), open the folder in
+> VS Code or any editor, and extend it for your own case with your AI assistant. This README is written for
+> both of you. Taking these tools further is a free service of
+> [Sharpes Process Engineering](https://jsharpes-portfolio.netlify.app); the site's Ask box can point you to the right starting file.
+
 - **Live tool:** https://jsharpes-portfolio.netlify.app/#hem-calc
 - **Run it locally:** download this repo and open `index.html` in a browser. It needs no install and no server.
 - **Related deck:** PSV Sizing, API 521 ([viewer](https://jsharpes-portfolio.netlify.app/slides/psv/),

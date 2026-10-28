@@ -388,6 +388,72 @@
         <div id="hem-calc">
           <p class="hem-subtitle">Homogeneous equilibrium model (Leung 1986) &middot; USC units &middot; Solves for upstream pressure p&#8321; &middot; Built-up backpressure check per API 521 7th Ed.</p>
 
+          <!-- Sources panel (portfolio rule 2026-10-27): kept in step with Cheme Tools\PSVs\SOURCES.md; thumbnails = assets/source-thumbs/ from Not on Website/source_thumbs/build_source_thumbs.py -->
+          <div id="hem-srcwrap">
+          <style>
+          #hem-srcwrap{margin:0 0 16px}
+          #hem-srcwrap details.srcs{--sp-bg:var(--white);--sp-bg2:var(--bg);--sp-line:var(--border);--sp-muted:var(--muted);--sp-ink:var(--navy);--sp-acc:var(--blue);display:block;margin:0;padding:0;border:1px solid var(--sp-line);border-radius:8px;background:var(--sp-bg);box-shadow:none;text-align:left}
+          #hem-srcwrap details.srcs>summary{list-style:none;display:flex;align-items:center;gap:8px;cursor:pointer;margin:0;padding:8px 12px;background:none;border:0;border-radius:8px;box-shadow:none;position:static;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--sp-muted);user-select:none}
+          #hem-srcwrap details.srcs>summary::-webkit-details-marker{display:none}
+          #hem-srcwrap details.srcs>summary::marker{content:""}
+          #hem-srcwrap details.srcs>summary::before{content:"\25B8";color:var(--sp-acc);width:12px}
+          #hem-srcwrap details.srcs[open]>summary::before{content:"\25BE"}
+          #hem-srcwrap details.srcs>summary:hover{background:none;color:var(--sp-acc)}
+          #hem-srcwrap details.srcs .srcnote{margin:0;padding:0 12px 8px;font-size:12px;line-height:1.45;color:var(--sp-muted);font-style:normal}
+          #hem-srcwrap details.srcs .srcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;margin:0;padding:0 12px 12px}
+          #hem-srcwrap details.srcs .src{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;align-items:start;margin:0;padding:8px;background:var(--sp-bg);border:1px solid var(--sp-line);border-radius:6px;color:var(--sp-ink);text-decoration:none;box-shadow:none;transform:none}
+          #hem-srcwrap details.srcs a.src:hover{border-color:var(--sp-acc)}
+          #hem-srcwrap details.srcs .src img,#hem-srcwrap details.srcs .src .ico{display:block;width:52px;height:68px;margin:0;padding:0;object-fit:cover;object-position:top;border:1px solid var(--sp-line);border-radius:3px;background:var(--sp-bg2)}
+          #hem-srcwrap details.srcs .src img.wide,#hem-srcwrap details.srcs .src .ico.wide{height:30px}
+          #hem-srcwrap details.srcs .src .ico{display:grid;place-items:center;font-size:9px;font-weight:700;letter-spacing:.04em;color:var(--sp-muted)}
+          #hem-srcwrap details.srcs .src b{display:block;margin:0;font-size:13px;line-height:1.25;font-weight:600;color:var(--sp-ink)}
+          #hem-srcwrap details.srcs .src .w{display:block;margin:2px 0 0;font-size:11.5px;line-height:1.35;color:var(--sp-muted)}
+          #hem-srcwrap details.srcs .src .k{display:block;margin:0 0 2px;font-style:normal;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--sp-acc)}
+          #hem-srcwrap details.srcs .src .k.off{color:var(--sp-muted)}
+          @media (max-width:560px){#hem-srcwrap details.srcs .srcgrid{grid-template-columns:minmax(0,1fr)}}
+          </style>
+          <details class="srcs">
+            <summary>Sources behind this tool <span id="hem-srccount"></span></summary>
+            <p class="srcnote">Decks and tools open on this site in a new tab. Books, papers and methods are cited, not linked. Detail by topic: SOURCES.md in the Method &amp; code repo.</p>
+            <div class="srcgrid" id="hem-srcgrid"></div>
+          </details>
+          <script>
+          (function () {
+            var TH = window.SRC_THUMB_BASE || 'assets/source-thumbs/';
+            var SOURCES = [
+              ["deck-psv", "deck", "PSV Sizing — API 521", "Mixed-phase relief piping (§5.5.10): when HEM applies and what it assumes", "https://jsharpes-portfolio.netlify.app/slides/psv/"],
+              ["api521", "book", "API STD 521, 7th ed. (2020), §5.5.10", "Two-phase flow in relief piping: the HEM / omega method this tool solves", null],
+              ["api520", "book", "API 520 Part I", "Built-up backpressure definitions used in the PRV-type check", null],
+              [null, "paper", "Leung (1986), AIChE J. 32(10)", "Generalized HEM omega correlation for flashing choked flow (cited; not held)", null],
+              [null, "paper", "Churchill (1977), Chem. Eng. 84(24)", "Darcy friction factor across all flow regimes (cited; not held)", null],
+              [null, "method", "thermo (Python library)", "Saturated liquid and vapor density and viscosity tables for the 7 fluids", null],
+              ["gpreh", "book", "CCPS, Guidelines for Pressure Relief and Effluent Handling Systems", "App. D.1.2 tube-rupture case (flashing propane) used to validate the full-flash benchmark solver", null],
+              [null, "book", "DIERS Project Manual", "App. II-E4-2 steam-water and App. IV-A laminar flashing cases used to validate the benchmark solver", null],
+              ["psvreport", "report", "PSV Relief-Calculation Validation Report (own)", "Benchmark solver vs. the three published cases: +1.5 %, +4.0 %, −0.14 %", null]
+            ];
+            var grid = document.getElementById('hem-srcgrid');
+            if (!grid) return;
+            document.getElementById('hem-srccount').textContent = '\u00b7 ' + SOURCES.length;
+            grid.innerHTML = SOURCES.map(function (s) {
+              var kind = s[1], wide = kind === 'deck' ? ' wide' : '';
+              var linkable = kind === 'deck' || kind === 'tool', url = linkable ? s[4] : null, off = linkable && !url;
+              var img = s[0] ? '<img src="' + TH + s[0] + '.jpg" alt="" loading="lazy" class="' + wide.trim() + '" data-kind="' + kind + '">'
+                             : '<span class="ico' + wide + '">' + kind.toUpperCase() + '</span>';
+              var inner = img + '<div><i class="k' + (off ? ' off' : '') + '">' + kind + (off ? ' \u00b7 not on the site yet' : '') + '</i><b>' +
+                          s[2] + (url ? ' \u2197' : '') + '</b><span class="w">' + s[3] + '</span></div>';
+              return url ? '<a class="src" href="' + url + '" target="_blank" rel="noopener">' + inner + '</a>' : '<div class="src">' + inner + '</div>';
+            }).join('');
+            Array.prototype.forEach.call(grid.querySelectorAll('img'), function (im) {
+              im.addEventListener('error', function () {
+                var sp = document.createElement('span'), k = im.getAttribute('data-kind');
+                sp.className = 'ico' + (k === 'deck' ? ' wide' : ''); sp.textContent = k.toUpperCase();
+                im.parentNode.replaceChild(sp, im);
+              });
+            });
+          })();
+          </script>
+          </div>
+
           <div class="hem-layout">
 
             <!-- inputs -->
